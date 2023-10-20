@@ -72,19 +72,31 @@ user1 - имя пользователя
 Для тестирования:
 
 curl -X POST http://127.0.0.1:5000/users/user1
+
 curl -X GET http://127.0.0.1:5000/users
 
 curl -X POST http://127.0.0.1:5000/users/user1
+
 curl -X POST http://127.0.0.1:5000/users/user3
+
 curl -X POST http://127.0.0.1:5000/posts/user1 -d "Post #1"
-curl -X GET http://127.0.0.1:5000/posts/user3 
-curl -X GET http://127.0.0.1:5000/posts/user1 
+
+curl -X GET http://127.0.0.1:5000/posts/user3
+
+curl -X GET http://127.0.0.1:5000/posts/user1
+ 
 curl -X GET http://127.0.0.1:5000/users
+
 curl -X GET http://127.0.0.1:5000/posts
+
 curl -X PUT http://127.0.0.1:5000/posts/user1/0 -d "Post #11111"
+
 curl -X GET http://127.0.0.1:5000/posts
+
 curl -X DELETE http://127.0.0.1:5000/posts/user1/0
+
 curl -X GET http://127.0.0.1:5000/posts
+
 
 
 
