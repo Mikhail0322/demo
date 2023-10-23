@@ -1,20 +1,18 @@
 from flask import Flask, jsonify, request
-# from dataclasses import dataclass, asdict
+
 
 app = Flask(__name__)
 
 
-
-class store_data:
-    name: str
-    posts: list = []
+class StoreData:
+    name = ''
+    posts = []
 
     def __init__(self, _name):
         self.name = _name
         self.posts = []
 
     def to_json(self):
-
         if len(self.posts) == 0:
             return '{"' + self.name + '"}'
 
@@ -30,7 +28,7 @@ class store_data:
         return out
 
 
-users_data: list = []
+users_data = []
 
 
 def dump_all_users_data_to_json():
@@ -50,13 +48,13 @@ def dump_all_users_data_to_json():
 
 
 def dump_all_post_to_json():
-    out: str = ''
+    out = ''
     for obj in users_data:
         out = out + obj.to_json()
     return out
 
 
-def dump_post_to_json(_user :str):
+def dump_post_to_json(_user: str):
 
     for obj in users_data:
         if obj.name == _user:
@@ -94,7 +92,7 @@ def create_user(_name: str):
             if obj.name == _name:
                 return jsonify({'error': 'User exist'}), 400
 
-        users_data.append(store_data(_name))
+        users_data.append(StoreData(_name))
 
         return jsonify({'response': 'ok'}), 201
     except Exception as ex:
@@ -120,7 +118,6 @@ def create_post(_name: str):
     for i in range(len(users_data)):
         if users_data[i].name == _name:
             post_data = request.get_data()
-            print('User:' + users_data[i].name + ' add new post:' + post_data.decode())
             users_data[i].posts.append(post_data)
             return jsonify({'response': 'ok'}), 200
 
@@ -129,7 +126,6 @@ def create_post(_name: str):
 
 @app.route('/posts', methods=['GET'])
 def get_posts():
-    #print(dump_all_post_to_json())
     return jsonify(dump_all_post_to_json())
 
 
